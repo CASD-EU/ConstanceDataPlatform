@@ -60,5 +60,15 @@ Sedona supports various language api:
   - Java
   - Scala
 
+## 2. Metadata management
+
+OpenMetadata is a unified platform for data
+ - discovery
+ - observability
+ - governance 
+
+It provides a `central metadata repository, in-depth lineage, and seamless team collaboration`.
+
+
 
 
