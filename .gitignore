@@ -162,4 +162,4 @@ cython_debug/
 .idea/
 cdp_venv/
 data/tmp/
-/conf
+conf/creds
