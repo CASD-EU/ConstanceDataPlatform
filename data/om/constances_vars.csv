@@ -1,0 +1,23 @@
+table,var,description,var_type,var_size,nomencalure,creation,suppression
+fr_communes_raw,geometry,geo location of the commune in a polygon form,geometry,18,geometry_type,2024,
+fr_communes_raw,wikipedia,url of the wiki page of the commune,string,28,,2024,
+fr_communes_raw,surf_ha,number of habitats inside the commune,number,8,,2024,
+fr_communes_raw,nom,name of the commune,string,26,,2024,
+fr_communes_raw,insee,code insee of the commune,string,5,,2024,
+fr_communes_clean,geometry,geo location of the commune in a polygon form,geometry,18,geometry_type,2024,
+fr_communes_clean,name,name of the commune and all letters are in lower case,string,26,,2024,
+fr_communes_clean,insee,code insee of the commune and all spaces are deleted,string,5,,2024,
+osm_france_raw,id,unique id of geographical entity in osm,long,10,,2021,
+osm_france_raw,type,the type of the entity such as node line,byte,2,,2021,
+osm_france_raw,latitude,The latitude of the gps coordinates,double,"24,20",,2021,
+osm_france_raw,longitude,The longitude of the gps coordinates,double,"24,20",,2021,
+osm_france_raw,nodes,"A list of points with a geographic position stored as coordinates, they are used to represent map features without a size.",array,36,,2021
+osm_france_raw,relations,"A list of key-value pairs (both arbitrary strings). They are used to store metadata about the map objects",array,36,,2021
+osm_france_raw,tags,"A list of points with a geographic position stored as coordinates, they are used to represent map features without a size.",array,36,,2021
+osm_france_raw,info,"A list of extra information(e.g. version, timestamp) about the map",string,36,,2021
+osm_hospitals_clean,id,unique id of geographical entity in osm,long,10,,2024,
+osm_hospitals_clean,tags,"A list of points with a geographic position stored as coordinates, they are used to represent map features without a size.",array,36,,2024
+osm_hospitals_clean,location,geo location of the hospital in a point form,geometry,18,geometry_type,2024,
+hospitals_in_communes,name,name of the commune and all letters are in lower case,string,26,,2024,
+hospitals_in_communes,geometry,geo location of the commune in a polygon form,geometry,18,geometry_type,2024,
+hospitals_in_communes,hospital_count,the number of hospitals inside the commune,int,3,,2024,

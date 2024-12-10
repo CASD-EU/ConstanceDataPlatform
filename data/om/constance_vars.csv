@@ -1,6 +1,0 @@
-table,var,description,var_type,var_size,nomencalure,creation,suppression
-fr_communes_raw,geometry,geo location of the commune in a polygon form ,string,18,geometry_type,2024,
-fr_communes_raw,wikipedia,url of the wiki page of the commune,string,28,,2024,
-fr_communes_raw,surf_ha,number of habitats inside the commune,number,8,,2024,
-fr_communes_raw,nom,name of the commune,string,26,,2024,
-fr_communes_raw,insee,code insee of the commune,string,5,,2024,

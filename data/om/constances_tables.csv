@@ -1,0 +1,6 @@
+domain,table,description,creation,suppression
+INSEE,fr_communes_raw,This table contains all geographical information of french communes,2022,
+Constances,fr_communes_clean,This table is built based on fr_communes_raw which is suitable for Contances related analysis,2024,
+OSM,osm_france_raw,This table is the open street map of france. It contains all geographical information such as roads hospitals in france,2020,
+Constances,osm_hospitals_clean,This table is build based on osm_france_raw. It only contains geographical information of hospitals in france,2024,
+Constances,hospitals_in_communes,This table contains the number of hospitals in each communes,2024,
