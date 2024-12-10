@@ -16,3 +16,5 @@ pydeck
 rasterio
 shapely
 folium
+openmetadata-ingestion~=1.4.0.1
+chardet
