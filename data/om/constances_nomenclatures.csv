@@ -1,3 +1,3 @@
 nomenclature,titre,variables_liees,nombre_lignes
-geometry_type,The description of possible type values in a geometry column,Aucune variable liée,
-code_insee,The administrative code of a french commune issued by INSEE ,Aucune variable liée,
+geometry_type,The description of possible type values in a geometry column,geometry,
+code_insee,The administrative code of a french commune issued by INSEE ,insee,
