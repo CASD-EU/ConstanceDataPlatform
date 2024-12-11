@@ -1,0 +1,13 @@
+parent,name*,displayName,description,synonyms,relatedTerms,references,tags,reviewers,owner,status
+,geometry_type,geometry_type,"The description of possible type values in a geometry column 
+ | geo_type   | description                                                     |
+|:-----------|:----------------------------------------------------------------|
+| point      | A pair of (latitude, longitude) which represent the geolocation |
+| line       | A list of points which represent a line                         |
+| polygon    | A list of points which represent a polygone                     |",geometry_type,,,,,user;admin,Approved
+,code_insee,code_insee,"The administrative code of a french commune issued by INSEE  
+ |   insee_code | commune_name   |
+|-------------:|:---------------|
+|            1 | toto           |
+|            2 | titi           |
+|            3 | tata           |",code_insee,,,,,user;admin,Approved

@@ -1,0 +1,4 @@
+geo_type;description
+point;A pair of (latitude, longitude) which represent the geolocation
+line;A list of points which represent a line
+polygon;A list of points which represent a polygone
