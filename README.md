@@ -62,12 +62,38 @@ Sedona supports various language api:
 
 ## 2. Metadata management
 
+### 2.1 Atlas
+
+### 2.2 Open Metadata
+
 OpenMetadata is a unified platform for data
  - discovery
  - observability
  - governance 
 
 It provides a `central metadata repository, in-depth lineage, and seamless team collaboration`.
+
+
+## 3. Workflow automation
+
+### 3.1 Nifi
+
+### 3.2 Airflow
+
+### 3.3 Nifi vs Airflow
+
+#### Use Apache NiFi
+ 
+Use Nifi, if 
+ - You need real-time data ingestion and processing.
+ - Data movement and integration between systems are the main goals.
+
+#### Use Apache Airflow 
+
+ - You need complex task orchestration with dependencies.
+ - Workflows are based on scheduled jobs or batch processing.
+
+
 
 
 
