@@ -116,6 +116,7 @@ def count_hospitals_in_each_commune(task_id:str, sedona_session, data_output_dir
     target_commune_cleaned_path = f"{data_output_dir}/target_commune_cleaned"
     hospital_cleaned_path = f"{data_output_dir}/hospital_cleaned"
     hospital_count_out_path = f"{data_output_dir}/hospital_count"
+    kepler_map_path = f"{data_output_dir}/hospital_count_map.html"
     try:
         hospital_cleaned_df = sedona_session.read.format("geoparquet").load(hospital_cleaned_path)
         hospital_cleaned_df.createOrReplaceTempView(f"{hospital_table_name}")
@@ -143,6 +144,9 @@ def count_hospitals_in_each_commune(task_id:str, sedona_session, data_output_dir
         hospital_count_df.coalesce(1).write.mode("overwrite").format("geoparquet").option("geoparquet.version",
                                                                                           "1.1.0").save(
             hospital_count_out_path)
+        # generate data viz map
+        sedona_kepler_map = SedonaKepler.create_map(df=hospital_count_df, name="hospital_count_df")
+        sedona_kepler_map.save_to_html(file_name=kepler_map_path)
         print(f"Successfully write the hospital count per commune at {hospital_count_out_path}")
     except Exception as e:
         print(f"Can't calculate the hospital count per commune: {e}")
