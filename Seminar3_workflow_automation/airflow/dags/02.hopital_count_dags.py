@@ -51,6 +51,7 @@ sc.setSystemProperty("sedona.global.charset", "utf8")
 # define custom function
 task1_id="clean_france_commune"
 task2_id = "clean_france_hospitals"
+task3_id = "count_hospitals_in_each_commune"
 
 def clean_france_commune(task_id:str, sedona_session, fr_commune_file_path:str, data_output_dir:str):
     print(f"Staring task: {task_id}")
@@ -107,12 +108,44 @@ def clean_france_hospitals(task_id:str, sedona_session, ile_france_pbf_path:str,
     finally:
         print(f"Task {task_id} ended")
 
-def count_hospitals_in_each_commune(task_id:str, sedona_session, target_commune_path:str, hospitals_path:str, data_output_dir:str):
+def count_hospitals_in_each_commune(task_id:str, sedona_session, data_output_dir:str):
     print(f"Staring task: {task_id}")
+    target_commune_table_name = "target_commune"
+    hospital_table_name = "hospital_geo"
+    hospital_per_commune_table_name = "commune_hospital"
+    target_commune_cleaned_path = f"{data_output_dir}/target_commune_cleaned"
+    hospital_cleaned_path = f"{data_output_dir}/hospital_cleaned"
+    hospital_count_out_path = f"{data_output_dir}/hospital_count"
     try:
-        pass
+        hospital_cleaned_df = sedona_session.read.format("geoparquet").load(hospital_cleaned_path)
+        hospital_cleaned_df.createOrReplaceTempView(f"{hospital_table_name}")
+
+        target_commune_cleaned_df = sedona_session.read.format("geoparquet").load(target_commune_cleaned_path)
+        target_commune_cleaned_df.createOrReplaceTempView(f"{target_commune_table_name}")
+
+        # join hospital and commune with condition ST_Contains
+        commune_hospital_df = sedona_session.sql(f"\n"
+                                         f"             select \n"
+                                         f"             tc.name, tc.geometry, h.id\n"
+                                         f"             FROM {target_commune_table_name} tc, {hospital_table_name} h \n"
+                                         f"             WHERE \n"
+                                         f"             ST_Contains(tc.geometry, h.location)\n"
+                                         f"            ")
+
+        commune_hospital_df.show()
+        commune_hospital_df.createOrReplaceTempView(f"{hospital_per_commune_table_name}")
+        # count hospital in each commune
+        hospital_count_df = sedona_session.sql(
+            f"SELECT c.name, c.geometry, count(*) as hospital_count "
+            f"FROM {hospital_per_commune_table_name} c "
+            f"GROUP BY c.name, c.name, c.geometry "
+            f"sort by hospital_count desc")
+        hospital_count_df.coalesce(1).write.mode("overwrite").format("geoparquet").option("geoparquet.version",
+                                                                                          "1.1.0").save(
+            hospital_count_out_path)
+        print(f"Successfully write the hospital count per commune at {hospital_count_out_path}")
     except Exception as e:
-        pass
+        print(f"Can't calculate the hospital count per commune: {e}")
     finally:
         print(f"Task {task_id} ended")
 
@@ -138,19 +171,13 @@ with DAG(
         retries=3,
     )
 
-    templated_command = textwrap.dedent(
-        """
-    {% for i in range(5) %}
-        echo "This is task 3 running"
-    {% endfor %}
-    """
-    )
-
-    t3 = BashOperator(
-        task_id="task_3",
-        depends_on_past=False,
-        bash_command=templated_command,
+    t3 = PythonOperator(
+        task_id=task3_id,
+        python_callable=count_hospitals_in_each_commune,
+        op_args=[task3_id, sedona, data_output_dir],
         retries=3,
     )
 
-    t1 >> t2 >> t3
+
+
+    [t1, t2] >> t3
