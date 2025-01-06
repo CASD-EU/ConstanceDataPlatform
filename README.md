@@ -172,33 +172,33 @@ For more details, you can visit their official [website](https://airflow.apache.
     * Best for real-time, event-driven dataflows. 
     * Easy to use with visual, no-code UI. 
     * Built-in data lineage and provenance tracking. 
-    * Handles backpressure and fault tolerance automatically.
+    * Provides a huge amount pre-defined processors(https://nifi.apache.org/components/). No code or low code for
+      simple data integration
 
 - Cons:
-    * Not ideal for complex batch workflows. 
-    * Less popular for job scheduling tasks. 
-    * May require more resources for high-volume dataflows.
+    * Not ideal for complex batch workflows. Need to write custom processors with data transformation logic.
+    * Hard to share data pipelines via template(https://nifi.apache.org/docs/nifi-docs/html/user-guide.html#Create_Template).
+    * Complex configuration for cluster mode (e.g. ZooKeeper) and requires more resources for high-volume dataflows.
  
 Use Nifi, if 
- - You need real-time data ingestion and processing.
+ - You need event-driven data ingestion and processing.
  - Data movement and integration between systems are the main goals.
 
 #### 3.3.2 Apache Airflow 
 
-✅ Pros:
+- Pros:
+   * Best for batch data processing and workflow scheduling. 
+   * Highly customizable through Python-based workflows(Directed Acyclic Graph).
+   * Provides various operators for complex data transformation(e.g. Bash, python, mysql, etc.)
+   * Support various executor(e.g. Celery, K8s)
 
-Best for batch processing and job scheduling.
-Highly customizable through Python-based workflows.
-Integrates well with modern cloud services.
+- Cons:
+   * Not designed for real-time data ingestion. 
+   * Requires python coding skills to define workflows.
 
-❌ Cons:
-
-Not designed for real-time data ingestion.
-Requires coding skills to define workflows.
-Limited data governance features.
-Use Apache Airflow 
-
- - You need complex task orchestration with dependencies.
+Use Apache Airflow, if
+ - You need complex data transformation with various dependencies.
+ - You need to handle large scale data sources.
  - Workflows are based on scheduled jobs or batch processing.
 
 
