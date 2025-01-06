@@ -110,7 +110,7 @@ mutations to dataset metadata. It provides a solution for collecting, processing
 metadata about data objects. It also boasts a rich REST interface for a multitude of operations, such as creating 
 object types, entities insertion and searching.
 
-For more details, you can visit their official [website](https://atlas.apache.org/) and their [github page](https://github.com/apache/atlas)
+For more details, you can visit their official [website](https://atlas.apache.org/) and their [github page](https://github.com/apache/atlas)(1.9k stars)
 
 ### 2.2 OpenMetadata
 
@@ -121,7 +121,7 @@ OpenMetadata is a unified platform for data
 
 It provides a `central metadata repository, in-depth lineage, and seamless team collaboration`.
 
-For more details, you can visit their official [website](https://open-metadata.org/) and their [github page](https://github.com/open-metadata/OpenMetadata)
+For more details, you can visit their official [website](https://open-metadata.org/) and their [github page](https://github.com/open-metadata/OpenMetadata)(5.8k stars)
 
 
 ### 2.3 Atlas vs OpenMetadata
@@ -152,19 +152,51 @@ For more details, you can visit their official [website](https://open-metadata.o
 
 ## 3. Workflow automation
 
-### 3.1 Nifi
+### 3.1 NiFi
+
+NiFi is a **dataflow automation tool** designed for `real-time, event-driven` data ingestion, routing, transformation, and monitoring.
+
+For more details, you can visit their official [website](https://nifi.apache.org/) and their [github page](https://github.com/apache/nifi) (5k stars)
 
 ### 3.2 Airflow
 
+Airflow is a **workflow orchestration tool** designed to programmatically schedule, process, and monitor `complex batch ETL workflow`.
+
+For more details, you can visit their official [website](https://airflow.apache.org/) and their [github page](https://github.com/apache/airflow) (38.2k stars)
+
 ### 3.3 Nifi vs Airflow
 
-#### Use Apache NiFi
+#### 3.3.1 Apache NiFi
+
+- Pros:
+    * Best for real-time, event-driven dataflows. 
+    * Easy to use with visual, no-code UI. 
+    * Built-in data lineage and provenance tracking. 
+    * Handles backpressure and fault tolerance automatically.
+
+- Cons:
+    * Not ideal for complex batch workflows. 
+    * Less popular for job scheduling tasks. 
+    * May require more resources for high-volume dataflows.
  
 Use Nifi, if 
  - You need real-time data ingestion and processing.
  - Data movement and integration between systems are the main goals.
 
-#### Use Apache Airflow 
+#### 3.3.2 Apache Airflow 
+
+✅ Pros:
+
+Best for batch processing and job scheduling.
+Highly customizable through Python-based workflows.
+Integrates well with modern cloud services.
+
+❌ Cons:
+
+Not designed for real-time data ingestion.
+Requires coding skills to define workflows.
+Limited data governance features.
+Use Apache Airflow 
 
  - You need complex task orchestration with dependencies.
  - Workflows are based on scheduled jobs or batch processing.
