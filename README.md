@@ -85,14 +85,34 @@ Sedona supports various language api:
   * Easy to integrate with big data ecosystem (e.g. Hadoop, Flink, etc.).
   * Column oriented: better support for data transformation and analysis.
 - Cons:
-  * Hard to deploy and maintain in cluster mode.
+  * Hard to deploy and maintain in cluster mode(Single-node mode is easy to deploy and maintain).
   * Not designed for transactional data management. 
+  * Complete dissociation of data storage and calculation.(Zero data duplication).
 
 ## 2. Metadata management
 
+There are many metadata management tools. Most of them requires a licence, some of them are open source:
+ - Atlas
+ - Amundsen
+ - DataHub
+ - OpenMetadata
+ - Marquez
+
+In this seminar, we only compare Atlas and OpenMetadata.
+
+If you are not familiar with the terminology such as data governance, data management and metadata management. 
+Please go to this [page](https://github.com/pengfei99/DataGovernance/blob/main/README.md).
+
 ### 2.1 Atlas
 
-### 2.2 Open Metadata
+**Apache Atlas** is a metadata management and data governance tool, which helps in tracking and managing 
+mutations to dataset metadata. It provides a solution for collecting, processing, storing and maintaining 
+metadata about data objects. It also boasts a rich REST interface for a multitude of operations, such as creating 
+object types, entities insertion and searching.
+
+For more details, you can visit their official [website](https://atlas.apache.org/) and their [github page](https://github.com/apache/atlas)
+
+### 2.2 OpenMetadata
 
 OpenMetadata is a unified platform for data
  - discovery
@@ -101,6 +121,34 @@ OpenMetadata is a unified platform for data
 
 It provides a `central metadata repository, in-depth lineage, and seamless team collaboration`.
 
+For more details, you can visit their official [website](https://open-metadata.org/) and their [github page](https://github.com/open-metadata/OpenMetadata)
+
+
+### 2.3 Atlas vs OpenMetadata
+
+#### 2.3.1 Apache Atlas
+
+- Pros:
+   * Mature metadata management solution(e.g. metadata entities CRUD, data lineage, tag/glossary).
+   * Supports for custom metadata types creation which can have primitive attributes, complex attributes, object references.
+
+- Cons:
+   * Legacy UI and less intuitive interface.
+   * Lack of automatic metadata ingestion support. It only exists **Seven** hooks(e.g. HBase, Hive, Storm, etc.).
+   * Requires significant maintenance outside Hadoop environments.
+   * Access control policies are hard to set up.
+
+#### 2.3.2 OpenMetadata
+
+- Pros:
+   * Mature metadata management solution(e.g. metadata entities CRUD, data lineage, tag/glossary).
+   * Supports for custom metadata types creation which can have primitive attributes, complex attributes, object references.
+   * Access control policies are easy to set up.
+   * Provides many automatic metadata ingestion support. It provides **more than 50** hooks (e.g. MySQL, Postgres, Hive, Spark, etc.).
+   * Modern UI and allow communication between data producer and consumer.
+
+- Cons:
+   * Requires significant maintenance if hosted on premise.
 
 ## 3. Workflow automation
 
