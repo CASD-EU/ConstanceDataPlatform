@@ -1,3 +1,3 @@
-airflow webserver --port 80 &
+airflow webserver --port 8080 &
 
 airflow scheduler &
