@@ -13,9 +13,20 @@ notify you.
 Here, we suppose the metadata has been already loaded into the metadata management tool. To facilitate the understanding 
 of the demonstration, we reuse the scenario of `Seminar1 and Question4: Count hospitals in each commune in Île-de-France`  
 
+Below figures shows the list of tables in this scenario:
+
+![data_lineage_hospitals_counts.png](../../images/data_lineage_hospitals_counts.png)
+
+### 2.1.1 Discover data with keywords
+
+Suppose I am a newcomer, and all I know is that the data is about `hospital in french communes`. 
 
 ## 2.2 Use the lineage metadata to trace data provenance 
 
-## 2.3 Gathering metadata
+## 2.3 Collaboration (Atlas does not provide this functionality)
 
-## 2.4 Load metadata into OpenMetadata
+Announcements, tasks, Activity feed, and team conversations
+
+## 2.4 Gathering metadata
+
+## 2.5 Load metadata into OpenMetadata
