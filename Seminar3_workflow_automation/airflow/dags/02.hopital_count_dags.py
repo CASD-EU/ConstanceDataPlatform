@@ -158,7 +158,7 @@ with DAG(
     default_args=default_args,
     description="A simple tutorial DAG",
     schedule=timedelta(days=1),
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2025, 1, 1),
     catchup=False,
     tags=dag_tags,
 ) as dag:
