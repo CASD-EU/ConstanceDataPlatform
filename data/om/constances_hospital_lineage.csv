@@ -1,4 +1,4 @@
-origin_tab_name,origin_col_name,destinataire_tab_name,destinataire_col_name,ref_code
+src_tab_name,src_col_name,dest_tab_name,dest_col_name,ref_code
 fr_communes_raw,geometry,fr_communes_clean,geometry,Seminar3_workflow_automation/airflow/dags/02.hopital_count_dags.py
 fr_communes_raw,nom,fr_communes_clean,name,Seminar3_workflow_automation/airflow/dags/02.hopital_count_dags.py
 fr_communes_raw,insee,fr_communes_clean,insee,Seminar3_workflow_automation/airflow/dags/02.hopital_count_dags.py
