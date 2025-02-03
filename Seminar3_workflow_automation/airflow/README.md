@@ -8,5 +8,9 @@ process on your laptop to a distributed setup to support even the biggest workfl
 ## run airflow locally
 
 ```shell
+# start a web server (web gui)
+airflow webserver --port 8080 &
 
+# start a scheduler
+airflow scheduler &
 ```
