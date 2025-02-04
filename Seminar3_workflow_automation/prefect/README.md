@@ -25,6 +25,9 @@ pip install prefect
 prefect server start
 
 # This will open the Prefect dashboard in your browser at http://localhost:4200.
+
+# if you have other prefect service which need to connect to the server api, you may need to setup 
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api 
 ```
 
 ### 1.1 Transform your python script to prefect workflow
@@ -131,3 +134,90 @@ prefect supports many `work pool types`. You can get the full list in [here](htt
 
 A **deployment** is used to determine `when, where, and how a flow should run`. Deployments elevate flows to 
 remotely configurable entities that have their own API. To set a flow to run on a schedule, you need to create a deployment.
+
+Below `sample_deployment.py` is an example of the deployment of the previous sample_workflow.
+
+```python
+from prefect import flow, task
+from pathlib import Path
+
+@flow(log_prints=True)
+def show_chat(guest_list: list[str]):
+    """Flow: Show the number of stars that GitHub repos have"""
+    for i, guest in enumerate(guest_list):
+        # Call Task 1
+        welcome_msg = build_welcome_msg(guest)
+
+        # Call Task 2
+        answer_msg = answer_welcome_msg(i)
+
+        # Print the result
+        print(f"CASD: {welcome_msg}")
+        print(f"GUEST: {answer_msg}")
+
+
+@task
+def build_welcome_msg(guest_name: str):
+    """Task 1: CASD says hello to guest"""
+    return f"Hello, {guest_name}! Welcome to CASD"
+
+
+@task
+def answer_welcome_msg(index: dict):
+    """Task 2: guest say hello to CASD"""
+    return f"Hello, CASD. thank you very much! I'm guest {index}!"
+
+if __name__ == "__main__":
+    flow.from_source(
+        source=str(Path(__file__).parent),
+        entrypoint="sample_deployment.py:show_chat", # Specific flow to run
+    ).deploy(
+        name="sample-deployment",
+        parameters={
+            "guest_names": [
+                 "pengfei",
+                 "Thibaut"
+            ]
+        },
+        work_pool_name="casd-work-pool",
+        cron="0 * * * *",  # Run every hour
+    )
+```
+
+You can notice the main difference between a workflow and a deployment is the main.
+
+For a deployment, the main contains two parts:
+- source spec: define which is the source code of the workflow
+- deployement spec: define when (cron), where(work_pool_name), how(the input parameter) the workflow will run.
+
+> In our example, we use a local source, prefect supports various remote source(e.g. github, s3, etc.)
+> 
+
+#### 1.3.3 Activate a deployment
+
+Before activate a deployment, you need to check:
+1. the prefect server is running (In our case http://localhost:4200/)
+2. Check the work_pool_name exist
+```shell
+# if no prefect server, start one
+prefect server start
+
+# This will open the Prefect dashboard in your browser at http://localhost:4200.
+
+# if you have other prefect service which need to connect to the server api, you may need to setup 
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api 
+
+# check work pool
+prefect work-pool ls
+
+# Create a Process work pool if the desired work pool does not exist:
+prefect work-pool create --type process casd-work-pool
+
+# Start a worker to poll the work pool:
+prefect worker start --pool casd-work-pool
+
+# activate a deployment
+python sample_deployment.py
+```
+
+> If all executed correctly, you should see a activate deployment in the WebUI.

@@ -1,5 +1,5 @@
-from prefect import flow, task # Prefect flow and task decorators
-
+from prefect import flow, task
+from pathlib import Path
 
 @flow(log_prints=True)
 def show_chat(guest_list: list[str]):
@@ -27,11 +27,18 @@ def answer_welcome_msg(index: dict):
     """Task 2: guest say hello to CASD"""
     return f"Hello, CASD. thank you very much! I'm guest {index}!"
 
-
-# Run the flow
 if __name__ == "__main__":
-    show_chat([
-        "pengfei",
-        "Thibaut"
-    ])
-
+    flow.from_source(
+        source=str(Path(__file__).parent),
+        entrypoint="sample_deployment.py:show_chat", # Specific flow to run
+    ).deploy(
+        name="sample-deployment",
+        parameters={
+            "guest_names": [
+                 "pengfei",
+                 "Thibaut"
+            ]
+        },
+        work_pool_name="casd-work-pool",
+        cron="0 * * * *",  # Run every hour
+    )
