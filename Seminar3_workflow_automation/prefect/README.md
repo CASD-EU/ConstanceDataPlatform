@@ -195,7 +195,7 @@ For a deployment, the main contains two parts:
 
 #### 1.3.3 Activate a deployment
 
-Before activate a deployment, you need to check:
+Before activating a deployment, you need to check:
 1. the prefect server is running (In our case http://localhost:4200/)
 2. Check the work_pool_name exist
 ```shell
@@ -220,4 +220,4 @@ prefect worker start --pool casd-work-pool
 python sample_deployment.py
 ```
 
-> If all executed correctly, you should see a activate deployment in the WebUI.
+> If all executed correctly, you should see an activated deployment in the WebUI.
