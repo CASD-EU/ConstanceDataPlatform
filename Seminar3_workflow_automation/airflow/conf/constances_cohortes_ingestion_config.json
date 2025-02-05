@@ -1,4 +1,8 @@
 {
-    "raw_data_path": "/home/pliu/git/ConstanceDataPlatform/data/airflow/constances_cohortes11.csv",
-    "output_dir": "/home/pliu/git/ConstanceDataPlatform/data/airflow/out"
+    "constances_cohortes_data_dir": "/home/pliu/git/ConstanceDataPlatform/data/airflow/constances_cohortes",
+    "cohortes_dataset_name": "constances_cohortes",
+    "constances_air_data_dir": "/home/pliu/git/ConstanceDataPlatform/data/airflow/constances_air",
+    "air_dataset_name": "constances_air",
+    "year": 2022,
+    "output_dir": "/home/pliu/git/ConstanceDataPlatform/data/tmp/constances"
 }
