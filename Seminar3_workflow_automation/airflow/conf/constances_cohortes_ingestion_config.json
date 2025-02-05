@@ -1,0 +1,4 @@
+{
+    "raw_data_path": "/home/pliu/git/ConstanceDataPlatform/data/airflow/constances_cohortes.csv",
+    "output_dir": "/home/pliu/git/ConstanceDataPlatform/data/airflow/out"
+}
