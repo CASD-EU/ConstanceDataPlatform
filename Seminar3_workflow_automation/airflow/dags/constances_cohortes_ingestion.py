@@ -35,16 +35,18 @@ def validate_constances_cohortes(raw_data_path:str):
     file = Path(raw_data_path)
     if not file.exists():
         print("Can't find a valid data file with the given path. Please check the path")
-        return False
-    print("Checking required columns...")
-    print("Contains all required columns.")
-    print("Checking required volunteer id...")
-    print("Contains all required required volunteer id.")
+        return "generate_anomaly_report"
+    else:
+        print("Checking required columns...")
+        print("Contains all required columns.")
+        print("Checking required volunteer id...")
+        print("Contains all required required volunteer id.")
+        return "clean_constances_cohortes"
 
 
 def generate_anomaly_report(raw_data_path:str,output_dir:str):
     print(f"Generating anomaly report for {raw_data_path}")
-    report_path = f"{output_dir}/anomaly_report_{raw_data_path}.txt"
+    report_path = f"{output_dir}/anomaly_report.txt"
     with open(report_path, "w") as file:
         file.write(f"This is the anomaly report of {raw_data_path}\n.")
 
@@ -96,7 +98,7 @@ with DAG(
     # t5: appariements of cohort and air
 
     # join to continue DAG execution
-    join = EmptyOperator(task_id="join", trigger_rule="none_failed_or_skipped")
+    end_task = EmptyOperator(task_id="join", trigger_rule="none_failed_or_skipped")
 
     t1 >> [t2, t3]  # Conditional branching
-    [t2, t3] >> join
+    [t2, t3] >> end_task
