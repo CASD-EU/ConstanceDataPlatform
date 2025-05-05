@@ -2,6 +2,6 @@
     "source_data_dir": "/home/pliu/git/ConstanceDataPlatform/data/tmp/constances",
     "dataset_name": "constances_cohortes_air",
     "year": 2022,
-    "volunteer_ids": ["id1","id2","id3"],
+    "volunteer_ids": ["id1","id2","id3","toto"],
     "output_dir": "/home/pliu/git/ConstanceDataPlatform/data/tmp/constances"
 }

@@ -1,5 +1,4 @@
 import json
-from shutil import copy
 from datetime import datetime, timedelta
 from typing import List
 
@@ -45,7 +44,7 @@ def validate_source_file(source_data_dir:str,dataset_name:str,year:str):
 def validate_volunteer_ids(volunteer_ids:List[str]):
     print("Checking volunteer ids validity...")
     all_volunteer_ids = ["id1","id2","id3"]
-    is_allowed = set(volunteer_ids).issuperset(all_volunteer_ids)
+    is_allowed = set(volunteer_ids).issubset(all_volunteer_ids)
     if is_allowed:
         return "start_extraction"
     else:
