@@ -83,7 +83,7 @@ Sedona supports various language api:
   * Can handle large-scale geospatial data processing (designed for distributed computing architecture).
   * Complete dissociation of data storage and processing. It supports various file system (e.g. HDFS, S3, etc.)
   * Easy to integrate with big data ecosystem (e.g. Hadoop, Flink, etc.).
-  * Column oriented: better support for data transformation and analysis.
+  * Column oriented: better support for column oriented data transformation and analysis.
 - Cons:
   * Hard to deploy and maintain in cluster mode(Single-node mode is easy to deploy and maintain).
   * Not designed for transactional data management. 
@@ -145,7 +145,7 @@ For more details, you can visit their official [website](https://open-metadata.o
    * Supports for custom metadata types creation which can have primitive attributes, complex attributes, object references.
    * Access control policies are easy to set up.
    * Provides many automatic metadata ingestion support. It provides **more than 50** hooks (e.g. MySQL, Postgres, Hive, Spark, etc.).
-   * Modern UI and allow communication between data producer and consumer.
+   * Modern UI and allow collaboration between different user role.
 
 - Cons:
    * Requires significant maintenance if hosted on premise.
@@ -153,6 +153,7 @@ For more details, you can visit their official [website](https://open-metadata.o
 ## 3. Workflow automation
 
 ### 3.1 NiFi
+
 
 NiFi is a **dataflow automation tool** designed for `real-time, event-driven` data ingestion, routing, transformation, and monitoring.
 
