@@ -84,3 +84,62 @@ print(ds)
 ds.to_netcdf(f'{file_root_path}/day{i+1}.nc',engine='netcdf4')
 
 ```
+
+
+## 1.2 Optimization options
+
+### 1.2.1. Reduce Data Precision and compression
+
+We can use `scale_factor, add_offset, and convert float64 → float32` to reduce precision to save some disk space.
+
+Update your encoding:
+
+encoding = {
+    'temperature': {
+        'dtype': 'float32',
+        'scale_factor': 0.01,     # 0.01°C resolution
+        'add_offset': 0,
+        '_FillValue': -999,
+        'zlib': True,
+        'complevel': 4,
+        'chunksizes': (1, 5, 5)
+    }
+}
+This alone will cut the variable size by ~50% (8 bytes → 4 bytes per value, plus compression).
+
+> Can't use float16, netcdf4 does not support float16.
+
+### 1.2.2. Use Only Shared 1D Coordinates
+
+Before concatenation, drop any 2D coordinates or attributes that are being stored redundantly:
+
+```python
+# Example cleanup for each file
+ds = ds.drop_vars([var for var in ds.data_vars if var not in ['temperature']])
+for coord in ds.coords:
+    if coord not in ['lat', 'lon']:
+        ds = ds.drop_vars(coord)
+
+# Ensure lat and lon are 1D and identical across files:
+assert np.allclose(data_list[0]['lat'], ds['lat'])
+assert np.allclose(data_list[0]['lon'], ds['lon'])
+
+```
+### 1.2.3. Disable Unnecessary Attributes or Metadata
+
+Attributes like long_name, history, conventions, and software version bloat the file:
+
+```python
+combined.attrs = {}  # remove global attributes
+combined['temperature'].attrs = {}  # clear variable metadata
+```
+
+### 1.2.4. Save with Classic Format (More Compatible & Compact)
+```python
+combined.to_netcdf(
+    f"{file_root_path}/merged_temperature.nc",
+    engine='netcdf4',
+    format='NETCDF4_CLASSIC',
+    encoding=encoding
+)
+```
