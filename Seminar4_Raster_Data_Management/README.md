@@ -1,5 +1,14 @@
 # Introduction of raster file format
 
+## 0. Useful terms
+
+- Raster format: Stores data as a grid of pixels, each with a value representing information (e.g., temperature, elevation, land cover).
+
+- Georeferencing: Embeds geographic metadata directly within the TIFF file, such as:
+
+- Coordinate reference system (CRS) — e.g., latitude/longitude or projected coordinates.
+
+- Geo-transform parameters — mapping pixel/line coordinates to real-world spatial coordinates.
 
 ## 1. Netcdf
 
@@ -143,3 +152,13 @@ combined.to_netcdf(
     encoding=encoding
 )
 ```
+
+
+## 2. GeoTIFF
+
+**GeoTIFF** is a `georeferenced raster image format` widely used in geographic information systems (GIS) to store 
+spatial data such as satellite imagery, aerial photos, digital elevation models, and other gridded data.
+
+**GeoTIFF** is compatible with TIFF viewers, but extended with geographic tags following the GeoTIFF specification.
+Almost all GIS and remote sensing software can read/write GeoTIFF.
+
