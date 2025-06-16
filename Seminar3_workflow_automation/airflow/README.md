@@ -7,6 +7,10 @@ process on your laptop to a distributed setup to support even the biggest workfl
 
 ## run airflow locally
 
-```shell
+The below scripts are tested with Debian 11
 
+```shell
+# goto the root dir where you want to host the 
+# create a python virtual env
+python -m venv airflow_venv
 ```
