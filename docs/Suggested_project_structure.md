@@ -40,7 +40,15 @@ constances_etl/
 │            ├── expected_integration_output.csv
 │            ├── expected_metadata.json
 │            └── expected_stats.csv
-
+├── docs/       # Documentation (Sphinx, Markdown, etc.)
+│   └── index.md
+│
+├── .gitignore
+├── MANIFEST.in      # To include extra resource into the packages
+├── requirements.txt      # Frozen dependencies for production
+├── requirements-dev.txt  # Dev/test dependencies (e.g., pytest, flake8)
+├── README.md
+├── pyproject.toml        # Modern build/configuration file
 ```
 
 ## 2. Unit Testing Strategy
